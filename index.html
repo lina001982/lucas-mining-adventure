@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Lucas Mining Adventure Web</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="game-shell">
+      <canvas id="gameCanvas" width="960" height="640" aria-label="Lucas mining scene"></canvas>
+
+      <h1>Lucas Mining Adventure</h1>
+
+      <div class="top-actions">
+        <button id="saveBtn" class="small-btn">Save Game</button>
+        <button id="newGameBtn" class="small-btn">New Game</button>
+        <button id="audioBtn" class="small-btn">Audio: ON</button>
+      </div>
+
+      <aside class="panel stats-panel">
+        <h2>STATS</h2>
+        <p><span class="icon coin"></span>Coins: <strong id="coinsText">$0</strong></p>
+        <p><span class="icon gem"></span>Gems: <strong id="gemsText">0</strong></p>
+        <p><span class="icon pick"></span>Pickaxe Lv <strong id="levelText">1</strong></p>
+        <p><span class="icon coin"></span>Per Mine <strong id="perMineText">$1</strong></p>
+        <p><span class="icon pet"></span>Pets: <strong id="petsText">0</strong></p>
+        <p><span class="icon rebirth"></span>Rebirths: <strong id="rebirthText">0</strong></p>
+        <p><span class="icon gem"></span>Permanent x: <strong id="multiplierText">1x</strong></p>
+        <p><span class="icon coin"></span>Rebirth Need <strong id="rebirthNeedStat">$500</strong></p>
+      </aside>
+
+      <section class="panel goal-panel">
+        <h2>GOAL</h2>
+        <p id="goalText">Reach 50 mined progress to unlock Copper.</p>
+        <p id="saveText" class="save-note">Manual save only.</p>
+      </section>
+
+      <section class="panel ore-panel">
+        <p>Current Ore: <strong id="oreText">Stone</strong></p>
+        <p>Next Ore: <strong id="nextOreText">Copper</strong></p>
+      </section>
+
+      <section class="panel map-panel">
+        <p>Current Map: <strong id="currentMapText">Beach Island</strong></p>
+        <p>Map Boost: <strong id="mapBoostText">1x</strong></p>
+      </section>
+
+      <nav class="action-panel">
+        <button id="upgradeBtn" class="game-btn">
+          Upgrade
+          <span id="upgradeCostText">Cost: $35</span>
+        </button>
+        <button id="petBtn" class="game-btn">
+          Pet
+          <span id="petCostText">Turtle: 30 gems</span>
+        </button>
+        <button id="rebirthBtn" class="game-btn">
+          Rebirth
+          <span id="rebirthCostText">Need: $500</span>
+        </button>
+        <button id="mapBtn" class="game-btn">
+          Switch Map
+          <span id="mapStatusText">Beach Island</span>
+        </button>
+        <button id="autoBtn" class="game-btn">
+          Auto Clicker
+          <span id="autoStatusText">Locked</span>
+        </button>
+      </nav>
+
+      <div id="messageText" class="message-bubble">Mine to start!</div>
+      <button id="mineBtn" class="mine-btn">⛏ MINE!</button>
+
+      <div id="particleLayer" class="particle-layer" aria-hidden="true"></div>
+
+      <footer>
+        <span>Lucas Gao</span>
+        <span>from Ottawa, Canada</span>
+      </footer>
+    </main>
+
+    <script src="game.js"></script>
+  </body>
+</html>
