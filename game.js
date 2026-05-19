@@ -12,6 +12,8 @@ const AUTO_CLICKER_COST = 1_000_000;
 const AUTO_CLICKER_INTERVAL = 1.0;
 const IDLE_DELAY = 5.0;
 const MUSIC_VOLUME = 0.018;
+const GAME_WIDTH = 960;
+const GAME_HEIGHT = 640;
 
 const ORES = [
   { name: "Stone", unlock: 0, value: 1, color: "#777982", dark: "#4e5058" },
@@ -426,6 +428,7 @@ function addFloat(text, x, y, color = "#fff") {
 
 function mine(automatic = false, clickPoint = null) {
   if (!automatic) handleUserAudio();
+  const mobile = isMobileLayout();
   const gain = perMine();
   state.coins += gain;
   state.oreProgress += gain;
@@ -437,9 +440,9 @@ function mine(automatic = false, clickPoint = null) {
     window.setTimeout(() => btn.mine.classList.remove("mine-hit"), 120);
   }
   addFloat(`+$${formatNumber(gain)}`, 565, 310, "#ffe36b");
-  addMineParticles(610, 360, automatic ? 4 : 6, currentOre());
-  if (!automatic && clickPoint) addFrontParticles(clickPoint.x, clickPoint.y, 8, currentOre());
-  else addMineParticles(480, 448, automatic ? 2 : 5, currentOre());
+  addMineParticles(610, 360, automatic ? 3 : mobile ? 4 : 6, currentOre());
+  if (!automatic && clickPoint) addFrontParticles(clickPoint.layerX, clickPoint.layerY, mobile ? 5 : 8, currentOre());
+  else addMineParticles(480, 448, automatic ? 1 : mobile ? 3 : 5, currentOre());
   if (automatic && state.totalMines % 4 === 0) setMessage("Auto Clicker mined!");
   if (!automatic) playMineSound();
   updateUI();
@@ -619,11 +622,39 @@ function oreParticleColor(ore) {
 }
 
 function eventToGamePoint(event) {
-  const rectBox = gameShell.getBoundingClientRect();
+  const rectBox = canvas.getBoundingClientRect();
+  const shellBox = gameShell.getBoundingClientRect();
   return {
     x: ((event.clientX - rectBox.left) / rectBox.width) * 960,
     y: ((event.clientY - rectBox.top) / rectBox.height) * 640,
+    layerX: event.clientX - shellBox.left,
+    layerY: event.clientY - shellBox.top,
   };
+}
+
+function isMobileLayout() {
+  return window.matchMedia("(max-width: 700px), (pointer: coarse)").matches;
+}
+
+function updateGameScale() {
+  const viewportW = window.visualViewport?.width || window.innerWidth;
+  const viewportH = window.visualViewport?.height || window.innerHeight;
+  const landscapeFit = window.matchMedia("(pointer: coarse)").matches && viewportW > viewportH && viewportH <= 640;
+
+  document.documentElement.classList.toggle("landscape-fit", landscapeFit);
+  if (!landscapeFit) {
+    gameShell.style.removeProperty("--game-scale");
+    gameShell.style.removeProperty("--game-left");
+    gameShell.style.removeProperty("--game-top");
+    return;
+  }
+
+  const scale = Math.min(viewportW / GAME_WIDTH, viewportH / GAME_HEIGHT);
+  const left = (viewportW - GAME_WIDTH * scale) / 2;
+  const top = (viewportH - GAME_HEIGHT * scale) / 2;
+  gameShell.style.setProperty("--game-scale", scale);
+  gameShell.style.setProperty("--game-left", `${left}px`);
+  gameShell.style.setProperty("--game-top", `${top}px`);
 }
 
 function pointHitsOre(point) {
@@ -1129,7 +1160,12 @@ btn.audio.addEventListener("click", () => {
   updateAudioButton();
 });
 
+window.addEventListener("resize", updateGameScale);
+window.addEventListener("orientationchange", () => window.setTimeout(updateGameScale, 120));
+window.visualViewport?.addEventListener("resize", updateGameScale);
+
 loadGame();
+updateGameScale();
 updateAudioButton();
 updateUI();
 requestAnimationFrame(tick);

@@ -33,6 +33,10 @@ body {
   font-family: "Arial Black", Arial, "Trebuchet MS", sans-serif;
 }
 
+html {
+  overflow-x: hidden;
+}
+
 button {
   font: inherit;
 }
@@ -442,4 +446,443 @@ footer {
   .game-shell {
     transform: scale(min(calc((100vw - 12px) / 960), calc((100vh - 12px) / 640)));
   }
+}
+
+@media (max-width: 768px) {
+  html {
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  body {
+    display: block;
+    min-height: 100svh;
+    max-height: none;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background: #1d3f53;
+    -webkit-text-size-adjust: 100%;
+    touch-action: manipulation;
+  }
+
+  .game-shell {
+    width: 100vw;
+    max-width: 100vw;
+    height: 900px;
+    max-height: none;
+    margin: 0 auto;
+    overflow: hidden;
+    transform: none;
+    scale: 1;
+    transform-origin: top center;
+    border-width: 2px;
+    box-shadow: none;
+  }
+
+  #gameCanvas {
+    top: 94px;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 960 / 640;
+  }
+
+  h1 {
+    left: 10px;
+    right: 10px;
+    top: 12px;
+    text-align: center;
+    font-size: clamp(22px, 7vw, 30px);
+    text-shadow:
+      3px 0 #1c1c22,
+      -3px 0 #1c1c22,
+      0 3px #1c1c22,
+      0 -3px #1c1c22,
+      3px 3px #1c1c22;
+  }
+
+  h1::after {
+    display: none;
+  }
+
+  .top-actions {
+    left: 10px;
+    right: 10px;
+    top: 48px;
+    gap: 6px;
+  }
+
+  .small-btn {
+    flex: 1;
+    width: auto;
+    min-height: 44px;
+    padding: 4px 3px;
+    font-size: clamp(10px, 3vw, 13px);
+    border-width: 3px;
+    box-shadow:
+      3px 4px 0 var(--shadow),
+      inset 0 5px 0 rgba(255, 238, 150, 0.85),
+      inset 0 -5px 0 var(--button-bottom);
+  }
+
+  .panel {
+    padding: 6px 7px;
+    border-width: 3px;
+    outline-width: 1px;
+    box-shadow:
+      3px 4px 0 rgba(43, 34, 30, 0.85),
+      inset 0 0 0 2px rgba(255, 255, 255, 0.45),
+      inset 0 -4px 0 rgba(214, 168, 82, 0.22);
+  }
+
+  .panel p {
+    font-size: clamp(11px, 3.2vw, 13px);
+    line-height: 1.08;
+    margin-bottom: 4px;
+  }
+
+  h2 {
+    font-size: clamp(13px, 3.7vw, 15px);
+    margin-bottom: 3px;
+  }
+
+  .message-bubble {
+    left: 16px;
+    top: 318px;
+    width: calc(100% - 32px);
+    font-size: clamp(13px, 3.7vw, 16px);
+  }
+
+  .mine-btn {
+    left: 10%;
+    top: 344px;
+    width: 80%;
+    height: 58px;
+    font-size: clamp(28px, 9vw, 38px);
+    border-width: 5px;
+    outline-width: 2px;
+    box-shadow:
+      5px 6px 0 var(--shadow),
+      inset 0 6px 0 rgba(255, 238, 150, 0.9),
+      inset 0 -8px 0 var(--button-bottom);
+  }
+
+  .action-panel {
+    left: 16px;
+    top: 424px;
+    width: calc(100% - 32px);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .game-btn {
+    width: 100%;
+    height: 52px;
+    min-height: 52px;
+    padding: 5px 7px 5px 34px;
+    font-size: clamp(13px, 3.8vw, 16px);
+    border-width: 3px;
+    outline-width: 2px;
+    box-shadow:
+      4px 5px 0 var(--shadow),
+      inset 0 6px 0 rgba(255, 238, 150, 0.85),
+      inset 0 -7px 0 var(--button-bottom);
+  }
+
+  .game-btn::before {
+    left: 11px;
+    width: 16px;
+    height: 16px;
+  }
+
+  .game-btn span {
+    font-size: clamp(9px, 2.8vw, 11px);
+    margin-top: 3px;
+  }
+
+  #autoBtn {
+    grid-column: 1 / -1;
+  }
+
+  .stats-panel {
+    left: 16px;
+    top: 630px;
+    width: calc(100% - 32px);
+    min-height: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 8px;
+  }
+
+  .stats-panel h2 {
+    grid-column: 1 / -1;
+  }
+
+  .goal-panel {
+    left: 16px;
+    top: 778px;
+    width: calc(100% - 32px);
+    min-height: 0;
+  }
+
+  .ore-panel {
+    left: 16px;
+    top: 840px;
+    width: calc(50% - 22px);
+    min-height: 0;
+  }
+
+  .map-panel {
+    left: calc(50% + 6px);
+    top: 840px;
+    width: calc(50% - 22px);
+    min-height: 0;
+  }
+
+  footer {
+    left: 16px;
+    right: 16px;
+    bottom: 12px;
+    align-items: center;
+    text-align: center;
+    font-size: 12px;
+    z-index: 4;
+  }
+
+  .pixel-particle {
+    box-shadow: none;
+  }
+}
+
+@media (max-width: 380px) {
+  .game-shell {
+    height: 860px;
+  }
+
+  h1 {
+    font-size: 21px;
+  }
+
+  .small-btn {
+    min-height: 40px;
+    font-size: 10px;
+  }
+
+  .mine-btn {
+    top: 330px;
+    height: 54px;
+    font-size: 30px;
+  }
+
+  .action-panel {
+    top: 404px;
+    gap: 7px;
+  }
+
+  .game-btn {
+    height: 48px;
+    min-height: 48px;
+    font-size: 13px;
+  }
+
+  .stats-panel {
+    top: 594px;
+  }
+
+  .goal-panel {
+    top: 742px;
+  }
+
+  .ore-panel,
+  .map-panel {
+    top: 802px;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 900px) and (pointer: coarse) {
+  .game-shell {
+    max-width: 100vw;
+    height: 1040px;
+  }
+
+  #gameCanvas {
+    top: 104px;
+  }
+
+  .message-bubble {
+    top: 480px;
+  }
+
+  .mine-btn {
+    top: 512px;
+    left: 12%;
+    width: 76%;
+    height: 62px;
+  }
+
+  .action-panel {
+    top: 600px;
+  }
+
+  .stats-panel {
+    top: 820px;
+  }
+
+  .goal-panel {
+    top: 938px;
+  }
+
+  .ore-panel,
+  .map-panel {
+    top: 990px;
+  }
+}
+
+@media (pointer: fine) and (min-width: 701px) and (max-width: 980px) and (min-height: 661px) {
+  body {
+    overflow: hidden;
+    place-items: center;
+  }
+
+  .game-shell {
+    transform: scale(min(calc((100vw - 12px) / 960), calc((100vh - 12px) / 640)));
+  }
+}
+
+html.landscape-fit,
+html.landscape-fit body {
+  width: 100vw;
+  height: 100vh;
+  min-height: 100vh;
+  max-height: 100vh;
+  margin: 0;
+  overflow: hidden;
+}
+
+html.landscape-fit body {
+  display: block;
+  background: #1d3f53;
+}
+
+html.landscape-fit .game-shell {
+  position: fixed;
+  left: var(--game-left, 0px);
+  top: var(--game-top, 0px);
+  width: 960px;
+  max-width: none;
+  height: 640px;
+  max-height: none;
+  margin: 0;
+  overflow: hidden;
+  transform: scale(var(--game-scale, 1));
+  transform-origin: top left;
+  scale: 1;
+  border-width: 4px;
+  box-shadow: 0 0 0 4px #5c4636, 0 12px 30px rgba(0, 0, 0, 0.45);
+}
+
+html.landscape-fit #gameCanvas {
+  top: 0;
+  width: 960px;
+  height: 640px;
+}
+
+html.landscape-fit h1 {
+  left: 30px;
+  right: auto;
+  top: 20px;
+  font-size: 32px;
+  text-align: left;
+}
+
+html.landscape-fit h1::after {
+  display: block;
+}
+
+html.landscape-fit .top-actions {
+  left: auto;
+  right: 24px;
+  top: 26px;
+  gap: 10px;
+}
+
+html.landscape-fit .small-btn {
+  flex: none;
+  width: 100px;
+  min-height: 30px;
+  padding: 4px 7px;
+  font-size: 12px;
+  border-width: 4px;
+}
+
+html.landscape-fit .stats-panel {
+  left: 24px;
+  top: 82px;
+  width: 178px;
+  display: block;
+}
+
+html.landscape-fit .goal-panel {
+  left: 24px;
+  top: 258px;
+  width: 178px;
+}
+
+html.landscape-fit .ore-panel {
+  left: 704px;
+  top: 84px;
+  width: 205px;
+}
+
+html.landscape-fit .map-panel {
+  left: 704px;
+  top: 152px;
+  width: 205px;
+}
+
+html.landscape-fit .action-panel {
+  left: 780px;
+  top: 232px;
+  width: 150px;
+  display: flex;
+  grid-template-columns: none;
+  gap: 6px;
+}
+
+html.landscape-fit .game-btn {
+  width: 150px;
+  height: 40px;
+  min-height: 40px;
+  padding: 3px 8px 5px 32px;
+  font-size: 15px;
+  border-width: 5px;
+}
+
+html.landscape-fit #autoBtn {
+  grid-column: auto;
+}
+
+html.landscape-fit .message-bubble {
+  left: 335px;
+  top: 420px;
+  width: 290px;
+  font-size: 16px;
+}
+
+html.landscape-fit .mine-btn {
+  left: 350px;
+  top: 448px;
+  width: 260px;
+  height: 78px;
+  font-size: 42px;
+  border-width: 8px;
+}
+
+html.landscape-fit footer {
+  left: auto;
+  right: 22px;
+  bottom: 14px;
+  align-items: flex-end;
+  text-align: right;
+  font-size: 13px;
 }
